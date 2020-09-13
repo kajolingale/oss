@@ -1,0 +1,47 @@
+1. Write a script to create 10 directories, say a1,a2,...,a10
+Report error if a directory/file exists with the same name.
+->for((i =1; $i<=10; i++))
+do
+        mkdir a$i;
+done
+
+2. Write a menu based script to perform following string operations
+a) To find length of a string
+c) Copying string
+d) Concatenation of strings
+e) Compare two strings
+f) Reversing a string
+->
+while(true)
+        do
+
+                read str
+                echo "enter choice"
+                read ch
+                case $ch in
+                        1)echo "length=" ${#str};;
+                        2)str1=$str echo $str;;
+                        3)read str2
+                                echo $str $str2;;
+                        4)read str2
+                                if [ $str == $str2 ]
+                                then
+                                        echo "equal"
+                                else
+                                        echo "not equal";
+                                fi;;
+                        5)echo $str | rev ;;
+                        *)echo "invalid";;
+                esac
+        done
+
+3.Write a shell script to rename all files in the current directory with numeric continuous 
+value(Warning: Do this in a personal folder. Don't use Home directory) 
+->
+for((i =1; $i<=10; i++))
+do
+        j=11
+        mv file$i.txt file$j.txt;
+        ((j=j+1))
+
+done
