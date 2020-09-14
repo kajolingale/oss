@@ -35,13 +35,182 @@ while(true)
                 esac
         done
 
-3.Write a shell script to rename all files in the current directory with numeric continuous 
-value(Warning: Do this in a personal folder. Don't use Home directory) 
-->
-for((i =1; $i<=10; i++))
-do
-        j=11
-        mv file$i.txt file$j.txt;
-        ((j=j+1))
+3.Write a shell script to rename all files in the current directory with numeric continuous value(Warning: Do this in a personal folder. Don't use Home directory) 
 
-done
+> 
+   for((i=1;i<10;i++))
+   do
+           mv a$i abbbb$i
+   done
+
+4. Write a script that print environment variable(Print $HOME,$PATH,$SHELL,$HISTORY,$LOGNAME,$TERM)
+
+>  echo "Path = $PATH"  
+   echo "Shell = $SHELL"
+   echo "History = $HISTORY"
+   echo "Logname = $LOGNAME"
+   echo "Term = $TERM"
+  
+5. Write a shell script to print all files permissions in current directory(Not name or other details)(Use cut commands)
+
+> ls -la | cut -b 1-10
+> ls -la | cut -c 1-10
+
+
+6. Write a shell script to print all files permissions and name of file
+
+> #!/bin/bash
+
+ls -l | awk '{ print $1 }' 
+
+
+7.Write a shell script to print all files name and size greater than 5K
+
+>  #!/bin/bash
+	for i in *
+	do
+		if [ -e $i ]
+		then
+			file=`ls -l $i | awk '{print $5}'`
+			if (( $file > 5000 ))
+			then
+				ls -l $i
+			fi 
+		fi
+	done
+	
+
+
+
+
+1. Write a script To check given year is leap or not.
+
+>	#!/bin/bash
+	echo 'Enter a year : '
+	read year
+	if (( $year%4 == 0 && $year%100 != 0 || $year%400 == 0))
+	then
+		echo 'Leap Year'
+	else
+		echo 'Not a Leap Year'
+	fi
+
+2. Write a script to print day of the week using
+	a) elif	b) case 
+	
+> #!/bin/bash
+
+	echo 'Enter the no of Day : '
+	read day
+
+	if [ $day == 1 ]
+	then
+		echo 'Sunday'
+	elif [ $day == 2 ]
+	then
+		echo 'Monday'
+	elif [ $day == 3 ]
+	then
+		echo 'Tuesday'
+	elif [ $day == 4 ]
+	then
+		echo 'Wednesday'
+	elif [ $day == 5 ]
+	then
+		echo 'Thrusday'
+	elif [ $day == 6 ]
+	then
+		echo 'Friday'
+	elif [ $day == 7 ]
+	then
+		echo 'Saturday'
+	else
+		echo 'Invalid Entry'
+	fi
+        
+3. a) Write a script to find biggest of three no.s
+   b) To find avg of 3 no.s, read no.s from keyboard
+   
+ > #!/bin/bash
+
+	echo 'Enter num1 : '
+	read num1
+	echo 'Enter num2 : '
+	read num2
+	echo 'Enter num3 : '
+	read num3
+
+	if (( num1 > num2 && num1 > num3 ))
+	then
+		echo $num1
+	elif (( num2 > num1 && num2 > num3 ))
+	then
+		echo $num2
+	else
+		echo $num3
+	fi
+
+
+4. Write a program to check wahether given no.is even or odd
+
+>	#!/bin/bash
+
+	echo 'Enter a number : '
+	read num
+
+	if (( num%2 == 0 ))
+	then 
+		echo $num 'is Even.'
+	else
+		echo $num 'is Odd.'
+	fi
+
+
+5. Write a program to print calendar of current month in next year,previous years.
+	For eg:-sep 2014,sep 2012 if current month is sep 2013	
+	
+> #!/bin/bash
+
+	mon=$(date | awk '{print $3}')
+	year=$(date | awk '{print $4}')
+
+	let "prev=year-1" "next=year+1"
+
+	cal $mon $prev
+	cal $mon $year
+	cal $mon $next
+
+6. Write a program to find sum and product of two no.s using 
+	a) let 
+	b)expr
+	c)bc	
+	
+> #!/bin/bash
+
+	echo 'Enter num1 : '
+	read num1
+	echo 'Enter num2 : '
+	read num2
+	echo 'Enter num3 : '
+	read num3
+
+	(( avg = (( $num1+$num2+$num3 ))/3 ))
+	echo 'Average : '$avg
+
+> #!/bin/bash
+
+	echo 'Enter num1 : '
+	read num1
+	echo 'Enter num2 : '
+	read num2
+
+	let "prodlet=num1*num2"
+
+	prodExp=$(expr $num1 \* $num2)
+
+	echo 'Let : '
+	echo $prodlet 
+	echo 'Expr : '
+	echo $prodExp
+	echo 'BC : '
+	echo $num1 \* $num2 | bc
